@@ -11,5 +11,4 @@ public class Veiculo {
         this.marca = marca;
     }
 
-
 }
