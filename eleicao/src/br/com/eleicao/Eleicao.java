@@ -12,8 +12,6 @@ public class Eleicao {
     private JButton votarButton;
     private JLabel lblCandidato1;
     private JLabel lblCandidato2;
-    private JLabel lblCandidatoPorcentagem1;
-    private JLabel lblCandidatoPorcentagem2;
     private JLabel lblPorcentagemCandidato1;
     private JLabel lblPorcentagemCandidato2;
 
@@ -32,14 +30,24 @@ public class Eleicao {
                 }
 
                 totalVotos++;
-                atualizarPorcentagens();
+
             }
         });
 
         apurarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                atualizarPorcentagens();
+                // Calcular as porcentagens
+                double porcentagemCandidato1 = (double) candidato01 / totalVotos * 100;
+                double porcentagemCandidato2 = (double) candidato02 / totalVotos * 100;
+
+                // Atualizar as JLabels com as porcentagens
+                lblPorcentagemCandidato1.setText("Porcentagem Mickey: " + String.format("%.0f", porcentagemCandidato2) + "%");
+                lblPorcentagemCandidato2.setText("\n Porcentagem Donald: " + String.format("%.0f", porcentagemCandidato1) + "%");
+
+                JOptionPane.showMessageDialog(null, "Votos Mickey: " + candidato02 + "\n Votos Donald: " + candidato01);
+
+
             }
         });
     }
@@ -51,18 +59,4 @@ public class Eleicao {
         lblPorcentagemCandidato2 = new JLabel();
     }
 
-    public void atualizarPorcentagens() {
-
-
-            // Calcular as porcentagens
-            double porcentagemCandidato1 = (double) candidato01 / totalVotos * 100;
-            double porcentagemCandidato2 = (double) candidato02 / totalVotos * 100;
-
-            // Atualizar as JLabels com as porcentagens
-            lblPorcentagemCandidato1.setText("Porcentagem Mickey: " + String.format("%.2f", porcentagemCandidato1) + "%");
-            lblPorcentagemCandidato2.setText("Porcentagem Donald: " + String.format("%.2f", porcentagemCandidato2) + "%");
-
-
-
-    }
 }
