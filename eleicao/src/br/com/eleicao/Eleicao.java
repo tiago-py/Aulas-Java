@@ -12,35 +12,57 @@ public class Eleicao {
     private JButton votarButton;
     private JLabel lblCandidato1;
     private JLabel lblCandidato2;
+    private JLabel lblCandidatoPorcentagem1;
+    private JLabel lblCandidatoPorcentagem2;
+    private JLabel lblPorcentagemCandidato1;
+    private JLabel lblPorcentagemCandidato2;
+
+    int totalVotos = 0;
     int candidato01 = 0;
     int candidato02 = 0;
-    int nulo = 0;
-public Eleicao() {
-    votarButton.addActionListener(new ActionListener() {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            if(rb1.isSelected()){
-                candidato01++;
-            }else if(rb2.isSelected()){
-                candidato02++;
-            }else{
-                nulo++;
+
+    public Eleicao() {
+        votarButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (rb1.isSelected()) {
+                    candidato02++;
+                } else if (rb2.isSelected()) {
+                    candidato01++;
+                }
+
+                totalVotos++;
+                atualizarPorcentagens();
             }
+        });
 
-
-        }
-    });
-    apurarButton.addActionListener(new ActionListener() {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            JOptionPane.showMessageDialog(null, "Donald" + candidato01 + "votos" + "Mickey" + candidato02 + "votos");
-        }
-    });
-}
+        apurarButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                atualizarPorcentagens();
+            }
+        });
+    }
 
     private void createUIComponents() {
         lblCandidato1 = new JLabel(new ImageIcon("mickey.png"));
         lblCandidato2 = new JLabel(new ImageIcon("donald.png"));
+        lblPorcentagemCandidato1 = new JLabel();
+        lblPorcentagemCandidato2 = new JLabel();
+    }
+
+    public void atualizarPorcentagens() {
+
+
+            // Calcular as porcentagens
+            double porcentagemCandidato1 = (double) candidato01 / totalVotos * 100;
+            double porcentagemCandidato2 = (double) candidato02 / totalVotos * 100;
+
+            // Atualizar as JLabels com as porcentagens
+            lblPorcentagemCandidato1.setText("Porcentagem Mickey: " + String.format("%.2f", porcentagemCandidato1) + "%");
+            lblPorcentagemCandidato2.setText("Porcentagem Donald: " + String.format("%.2f", porcentagemCandidato2) + "%");
+
+
 
     }
 }
